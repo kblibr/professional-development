@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <!-- Application Properties -->
+  <entry key="PORT">8080</entry>
+  <entry key="static.content">application/src/main/webapp/</entry>
+  <entry key="welcome.file">index.html</entry>
+
+  <!-- Logging Properties -->
+  <entry key="logging.pattern.default">%date %level class=%logger:%line %msg%n</entry>
+  <entry key="logging.use.console.appender">false</entry>
+  <entry key="logging.file">"professional.development.%i.log"</entry>
+  <entry key="logging.use.file.appender">true</entry>
+  <entry key="logging.use.rolling.file.appender">false</entry>
+  <entry key="logging.level">WARN</entry>
+  <entry key="logging.files.to.keep">3</entry>
+  <entry key="logging.file.size">500</entry>
+
+  <!-- Database Properties -->
+  <entry key="database.host">localhost</entry>
+  <entry key="database.port">5432</entry>
+  <entry key="database.name">professionaldevelopment</entry>
+  <entry key="database.username">postgres</entry>
+  <entry key="database.password">?</entry>
+  <entry key="database.schema.location">application/src/main/resources/sql/schema</entry>
+  <entry key="database.version.location">"application/src/main/resources/sql/version"</entry>
+</properties>

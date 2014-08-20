@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>professional-development</artifactId>
+    <groupId>org.familysearch.professional-development</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>acceptance-tests</artifactId>
+
+  <properties>
+    <run.server>true</run.server>
+    <host>http://localhost</host>
+    <properties.file>../application/src/main/resources/properties.xml</properties.file>
+    <database.schema.location>../application/src/main/resources/sql/schema</database.schema.location>
+    <database.version.location>"../application/src/main/resources/sql/version"</database.version.location>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skipTests>true</skipTests>
+          <systemPropertyVariables>
+            <run.server>${run.server}</run.server>
+            <host>${host}</host>
+            <properties.file>${properties.file}</properties.file>
+            <database.schema.location>${database.schema.location}</database.schema.location>
+            <database.version.location>${database.version.location}</database.version.location>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>run-acceptance-tests</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skipTests>false</skipTests>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>heroku</id>
+      <properties>
+        <run.server>false</run.server>
+        <host>http://someapp.herokuapp.com</host>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>localhost</id>
+      <properties>
+        <run.server>false</run.server>
+        <host>http://localhost:8080</host>
+      </properties>
+    </profile>
+
+  </profiles>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.familysearch.professional-development</groupId>
+      <artifactId>application</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client-gson</artifactId>
+    </dependency>
+
+  </dependencies>
+
+</project>
