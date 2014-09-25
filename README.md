@@ -3,6 +3,9 @@
 
 This is a template for a web application that uses embedded Jetty. The sample code consists of a static html page, a database version system, a health check servlet and a simple servlet.
 
+## Build Status
+[ ![Codeship Status for ramesbury/professional-development](https://www.codeship.io/projects/3fbb3e90-26f2-0132-ef65-12761ece8b0c/status)](https://www.codeship.io/projects/37595)
+
 ## Running the application locally
 
 First, from the root of the project, build the project with:
