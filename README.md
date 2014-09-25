@@ -6,6 +6,10 @@ This is a template for a web application that uses embedded Jetty. The sample co
 ## Build Status
 [ ![Codeship Status for ramesbury/professional-development](https://www.codeship.io/projects/3fbb3e90-26f2-0132-ef65-12761ece8b0c/status)](https://www.codeship.io/projects/37595)
 
+## Environmental Variables
+
+The environmental variable "database.password" needs to be set.
+
 ## Running the application locally
 
 First, from the root of the project, build the project with:
