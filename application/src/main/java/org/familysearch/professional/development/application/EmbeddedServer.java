@@ -36,22 +36,26 @@ public class EmbeddedServer {
 
   public void start() {
     try {
+      LOGGER.debug("msg=\"initializing embedded server\"");
       initialize();
+      LOGGER.debug("msg=\"joining server\"");
       server.join();
     }
     catch (Exception e) {
-      e.printStackTrace();
+      LOGGER.error("msg=\"server initialize failed\"", e);
       System.exit(1);
     }
   }
 
   public int startOnRandomAvailablePort() {
     try {
+      LOGGER.debug("msg=\"getting available port\"");
       this.port = findAvailablePort();
+      LOGGER.debug("port=" + this.port);
       this.initialize();
     }
     catch (Exception e) {
-      e.printStackTrace();
+      LOGGER.error("msg=\"server initialize failed\"", e);
       System.exit(1);
     }
     return port;
@@ -59,25 +63,32 @@ public class EmbeddedServer {
 
   public void stop() {
     try {
+      LOGGER.debug("msg=\"stopping server\"");
       server.stop();
     }
     catch (Exception e) {
-      e.printStackTrace();
+      LOGGER.error("msg=\"stopping server failed\"", e);
       System.exit(1);
     }
   }
 
   private void initialize() throws Exception {
     server = new Server();
+    LOGGER.debug("msg=\"getting connectors\"");
     server.setConnectors(getConnectors(server));
+    LOGGER.debug("msg=\"getting handlers\"");
     server.setHandler(getHandlers());
+    LOGGER.debug("msg=\"starting server\"");
     server.start();
   }
 
   private Connector[] getConnectors(org.eclipse.jetty.server.Server server) {
+    LOGGER.debug("msg=\"creating HttpConfiguration\"");
     HttpConfiguration httpConfiguration = new HttpConfiguration();
     httpConfiguration.setSendServerVersion(false);
+    LOGGER.debug("msg=\"creating HttpConnectionFactory\"");
     HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(httpConfiguration);
+    LOGGER.debug("msg=\"creating ServerConnector\"");
     ServerConnector httpConnector = new ServerConnector(server, httpConnectionFactory);
     httpConnector.setPort(this.getPort());
     return new Connector[]{httpConnector};
@@ -90,17 +101,22 @@ public class EmbeddedServer {
   }
 
   private Handler getAPIHandlers() throws IllegalAccessException, InstantiationException {
+    LOGGER.debug("msg=\"getting api handlers\"");
     ServletHandler handler = new ServletHandler();
 
+    LOGGER.debug("msg=\"getting filter mappings\"");
     FilterMapping[] filterMappings = FilterMapping.values();
+    LOGGER.debug("msg=\"getting servlet mappings\"");
     ServletMapping[] servletMappings = ServletMapping.values();
 
     for (FilterMapping filterMapping : filterMappings) {
       FilterHolder filterHolder = new FilterHolder(filterMapping.getFilterClass().newInstance());
+      LOGGER.debug("msg=\"adding " + filterMapping.getFilterClass() + "\"");
       handler.addFilterWithMapping(filterHolder, filterMapping.getPath(), EnumSet.of(DispatcherType.REQUEST));
     }
     for (ServletMapping servletMapping : servletMappings) {
       ServletHolder servletHolder = new ServletHolder(servletMapping.getServletClass().newInstance());
+      LOGGER.debug("msg=\"adding " + servletMapping.getServletClass() + "\"");
       handler.addServletWithMapping(servletHolder, servletMapping.getPath());
     }
     return handler;
@@ -109,7 +125,9 @@ public class EmbeddedServer {
   private Handler getStaticContentHandler() {
     ResourceHandler handler = new ResourceHandler();
     handler.setDirectoriesListed(true);
+    LOGGER.debug("msg=\"setting welcome file to " + ApplicationProperties.getWelcomeFile() + "\"");
     handler.setWelcomeFiles(new String[]{ApplicationProperties.getWelcomeFile()});
+    LOGGER.debug("msg=\"setting resource base to " + ApplicationProperties.getStaticContentLocation() + "\"");
     handler.setResourceBase(ApplicationProperties.getStaticContentLocation());
     return handler;
   }

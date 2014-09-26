@@ -8,11 +8,11 @@
 
   <!-- Logging Properties -->
   <entry key="logging.pattern.default">%date %level class=%logger:%line %msg%n</entry>
-  <entry key="logging.use.console.appender">false</entry>
+  <entry key="logging.use.console.appender">true</entry>
   <entry key="logging.file">"professional.development.%i.log"</entry>
-  <entry key="logging.use.file.appender">true</entry>
+  <entry key="logging.use.file.appender">false</entry>
   <entry key="logging.use.rolling.file.appender">false</entry>
-  <entry key="logging.level">WARN</entry>
+  <entry key="logging.level">DEBUG</entry>
   <entry key="logging.files.to.keep">3</entry>
   <entry key="logging.file.size">500</entry>
 

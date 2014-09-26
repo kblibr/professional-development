@@ -17,9 +17,7 @@ public class Main {
   private final static Logger LOGGER = LoggerFactory.createLogger(Main.class);
 
   public static void main(String[] args) throws Exception {
-    for (int i = 0; i < 1000; i++) {
-//      LOGGER.warn("msg=\"Starting server\"");
-    }
+    LOGGER.info("msg=\"creating embedded server\"");
     EmbeddedServer embeddedServer = new EmbeddedServer();
     embeddedServer.start();
   }

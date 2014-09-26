@@ -5,6 +5,9 @@ package org.familysearch.professional.development.application.domain;
 
 import java.sql.Connection;
 
+import ch.qos.logback.classic.Logger;
+
+import org.familysearch.professional.development.application.LoggerFactory;
 import org.familysearch.professional.development.application.domain.connection.SQLConnection;
 
 /**
@@ -13,6 +16,8 @@ import org.familysearch.professional.development.application.domain.connection.S
  */
 public abstract class BaseDao {
 
+  private static Logger LOGGER = LoggerFactory.createLogger(BaseDao.class);
+
   protected Connection connection;
 
   static {
@@ -20,12 +25,13 @@ public abstract class BaseDao {
       Class.forName("org.postgresql.Driver");
     }
     catch (ClassNotFoundException e) {
-      e.printStackTrace();
+      LOGGER.error("loading database driver failed", e);
       System.exit(8);
     }
   }
 
   public BaseDao() {
+    LOGGER.debug("msg=\"getting connection\"");
     this.connection = SQLConnection.getConnection();
   }
 
