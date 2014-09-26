@@ -1,0 +1,4 @@
+CREATE TABLE tests
+(
+  test INTEGER PRIMARY KEY NOT NULL
+);
