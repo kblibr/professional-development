@@ -23,5 +23,5 @@
   <entry key="database.username">postgres</entry>
   <entry key="database.password">?</entry>
   <entry key="database.schema.location">application/src/main/resources/sql/schema</entry>
-  <entry key="database.version.location">"application/src/main/resources/sql/version"</entry>
+  <entry key="database.version.location">application/src/main/resources/sql/version</entry>
 </properties>
