@@ -58,7 +58,7 @@
       <id>heroku</id>
       <properties>
         <run.server>false</run.server>
-        <host>http://someapp.herokuapp.com</host>
+        <host>http://professional-development.herokuapp.com</host>
       </properties>
     </profile>
 
