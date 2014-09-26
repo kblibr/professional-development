@@ -98,7 +98,7 @@ public final class SQLConnection {
           try {
             LOGGER.debug("msg=\"executing file\"");
             executeSQLFile(files[index]);
-            LOGGER.debug("msg=\"updating version\"");
+            LOGGER.info("msg=\"updating the database to version " + (index + 1) + "\"");
             Statements.UPDATE_VERSION.execute();
           }
           catch (SQLException e) {
