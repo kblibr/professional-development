@@ -12,7 +12,7 @@
   <entry key="logging.file">"professional.development.%i.log"</entry>
   <entry key="logging.use.file.appender">false</entry>
   <entry key="logging.use.rolling.file.appender">false</entry>
-  <entry key="logging.level">INFO</entry>
+  <entry key="logging.level">DEBUG</entry>
   <entry key="logging.files.to.keep">3</entry>
   <entry key="logging.file.size">500</entry>
 
