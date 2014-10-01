@@ -3,20 +3,16 @@
  */
 package org.familysearch.professional.development.application.domain.connection;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Scanner;
-
 import ch.qos.logback.classic.Logger;
-
 import org.familysearch.professional.development.application.ApplicationProperties;
 import org.familysearch.professional.development.application.LoggerFactory;
 import org.familysearch.professional.development.application.domain.prepared.statements.Statements;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Author Brian Amesbury
@@ -98,7 +94,7 @@ public final class SQLConnection {
           try {
             LOGGER.debug("msg=\"executing file\"");
             executeSQLFile(files[index]);
-            LOGGER.info("msg=\"updating the database to version " + (index + 1) + "\"");
+            LOGGER.info("msg=\"updating the database to version " + ( index + 1 ) + "\"");
             Statements.UPDATE_VERSION.execute();
           }
           catch (SQLException e) {
@@ -138,7 +134,11 @@ public final class SQLConnection {
   private static File[] getFiles(String directory) {
     LOGGER.debug("msg=\"getting files in " + directory + "\"");
     File folder = new File(directory);
-    return folder.listFiles();
+    File[] files = folder.listFiles();
+    if (null != files) {
+      Arrays.sort(files);
+    }
+    return files;
   }
 
   private static void executeSQLFile(File file) throws SQLException {
